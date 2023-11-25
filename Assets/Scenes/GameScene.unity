@@ -664,6 +664,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5499719274468686463, guid: 57bcf4a231db0db4da066b8969d19317,
+        type: 3}
+      propertyPath: tomatoPrefab
+      value: 
+      objectReference: {fileID: 1490357944093293583, guid: 48a1d49b1c9064a4985ac25d1b195233,
+        type: 3}
+    - target: {fileID: -5499719274468686463, guid: 57bcf4a231db0db4da066b8969d19317,
+        type: 3}
+      propertyPath: kitchenObjectSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 95aeacc50337d7c4fb88f87fb2e97101,
+        type: 2}
     - target: {fileID: 393484552095419859, guid: 57bcf4a231db0db4da066b8969d19317,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1012,6 +1024,18 @@ MonoBehaviour:
   m_AmplitudeGain: 1
   m_FrequencyGain: 1
   mNoiseOffsets: {x: 113.98877, y: 688.4468, z: 150.95032}
+--- !u!114 &2105635647 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -5499719274468686463, guid: 57bcf4a231db0db4da066b8969d19317,
+    type: 3}
+  m_PrefabInstance: {fileID: 1027770639}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d488c486aa2e4134eac9e7a8055f37a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5024605444911498437
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1020,6 +1044,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5499719274468686463, guid: 57bcf4a231db0db4da066b8969d19317,
+        type: 3}
+      propertyPath: testing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5499719274468686463, guid: 57bcf4a231db0db4da066b8969d19317,
+        type: 3}
+      propertyPath: kitchenObjectSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 2d056cc88cdeb2d448e8eac821d9f434,
+        type: 2}
+    - target: {fileID: -5499719274468686463, guid: 57bcf4a231db0db4da066b8969d19317,
+        type: 3}
+      propertyPath: secondClearCounter
+      value: 
+      objectReference: {fileID: 2105635647}
     - target: {fileID: 393484552095419859, guid: 57bcf4a231db0db4da066b8969d19317,
         type: 3}
       propertyPath: m_LocalPosition.x
