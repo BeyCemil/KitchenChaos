@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 public class Player : MonoBehaviour, IKitchenObjectParent
 {
 
-    public static Player Instance {get; private set;}
+    public static Player Instance { get; private set; }
 
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public class OnSelectedCounterChangedEventArgs : EventArgs
@@ -29,13 +29,22 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private void Awake()
     {
-        if (Instance != null){Debug.Log("More than 1 player.");}
+        if (Instance != null) { Debug.Log("More than 1 player."); }
         Instance = this;
     }
 
     private void Start()
     {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
+        gameInput.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
+    }
+
+    private void GameInput_OnInteractAlternateAction(object sender, System.EventArgs e)
+    {
+        if (selectedCounter != null)
+        {
+            selectedCounter.InteractAlternate(this);
+        }
     }
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e)
@@ -75,7 +84,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
                 if (baseCounter != selectedCounter)
                 {
                     SetSelectedCounter(baseCounter);
-                    
+
                 }
             }
             else
@@ -101,7 +110,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         if (!canMove)
         {
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
-            canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
+            canMove = moveDir.x != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
 
             if (canMove)
             {
@@ -110,7 +119,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
             else
             {
                 Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
-                canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
+                canMove = moveDir.z != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
 
                 if (canMove)
                 {
@@ -132,34 +141,34 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         transform.forward = Vector3.Slerp(transform.forward, moveDir, moveDistance);
     }
 
-    private void SetSelectedCounter (BaseCounter selectedCounter)
+    private void SetSelectedCounter(BaseCounter selectedCounter)
     {
         this.selectedCounter = selectedCounter;
         OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs { selectedCounter = selectedCounter });
     }
 
-   public Transform GetKitchenObjectFollowTransform()
-   {
-      return kitchenObjectHoldPoint;
-   }
+    public Transform GetKitchenObjectFollowTransform()
+    {
+        return kitchenObjectHoldPoint;
+    }
 
-   public void SetKitchenObject(KitchenObject kitchenObject)
-   {
-      this.kitchenObject = kitchenObject;
-   }
+    public void SetKitchenObject(KitchenObject kitchenObject)
+    {
+        this.kitchenObject = kitchenObject;
+    }
 
-   public KitchenObject GetKitchenObject()
-   {
-      return kitchenObject;
-   }
+    public KitchenObject GetKitchenObject()
+    {
+        return kitchenObject;
+    }
 
-   public void ClearKitchenObject()
-   {
-      kitchenObject = null;
-   }
+    public void ClearKitchenObject()
+    {
+        kitchenObject = null;
+    }
 
-   public bool HasKitchenObject()
-   {
-      return kitchenObject != null;
-   }
+    public bool HasKitchenObject()
+    {
+        return kitchenObject != null;
+    }
 }
